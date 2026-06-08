@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>幕田 亮介 | 研究ポートフォリオ</title>
-  <meta name="description" content="日本大学大学院 理工学研究科 修士課程の幕田亮介の研究ポートフォリオ。深層強化学習を用いた交通信号制御に関する研究を紹介します。" />
+  <meta name="description" content="日本大学大学院 理工学研究科 修士課程の幕田亮介の研究ポートフォリオ。深層強化学習・階層型強化学習を用いた交通信号制御に関する研究を紹介します。" />
   <meta name="author" content="幕田 亮介 (Ryosuke Makuta)" />
   <!-- 検索エンジンにインデックスさせない（URLを知っている人だけが閲覧する想定） -->
   <meta name="robots" content="noindex, nofollow" />
@@ -279,6 +279,9 @@
       box-shadow: var(--shadow);
     }
     .card + .card { margin-top: 1rem; }
+    .card > p:first-child { margin-top: 0; }
+    .card .lead { font-size: 1rem; }
+    .card .lead strong { color: var(--primary-strong); }
 
     .grid-2 {
       display: grid;
@@ -317,7 +320,7 @@
     }
 
     /* Projects */
-    .project h3 { margin: 0 0 0.4rem; font-size: 1.1rem; }
+    .project h3 { margin: 0 0 0.4rem; font-size: 1.08rem; }
     .project p { margin: 0 0 0.8rem; color: var(--muted); }
     .project .meta {
       display: flex;
@@ -348,9 +351,9 @@
       padding-left: 1.1rem;
       border-left: 3px solid var(--accent);
     }
-    .pub-list .pub-title { font-weight: 600; }
-    .pub-list .pub-meta { color: var(--muted); font-size: 0.92rem; }
-    .pub-list .pub-authors { font-size: 0.92rem; }
+    .pub-list .pub-title { font-weight: 600; margin: 0 0 0.2rem; }
+    .pub-list .pub-meta { color: var(--muted); font-size: 0.92rem; margin: 0.2rem 0 0; }
+    .pub-list .pub-authors { font-size: 0.92rem; margin: 0; }
     .pub-list .me { color: var(--primary); font-weight: 600; }
 
     /* Contact */
@@ -424,17 +427,19 @@
             <span class="en">Ryosuke Makuta</span>
           </h1>
           <p class="hero__lead">
-            深層強化学習を用いて、日本の道路環境に即した交通信号制御の渋滞抑制に取り組んでいます。
+            深層強化学習・階層型強化学習を用いて、日本の道路環境に即した
+            複数交差点の信号制御による渋滞緩和に取り組んでいます。
           </p>
           <p class="hero__affil">
-            日本大学大学院 理工学研究科 交通システム工学専攻 修士課程1年<br />
-            高橋・中村研究室
+            日本大学大学院 理工学研究科 修士課程1年<br />
+            高橋研究室（指導教員：高橋 聖 教授）
           </p>
           <ul class="tags" aria-label="研究キーワード">
             <li class="tag">深層強化学習</li>
-            <li class="tag">交通信号制御</li>
-            <li class="tag">DQN / DDQN</li>
             <li class="tag">階層型強化学習</li>
+            <li class="tag">交通信号制御</li>
+            <li class="tag">複数交差点</li>
+            <li class="tag">DDQN</li>
             <li class="tag">SUMO</li>
           </ul>
         </div>
@@ -442,15 +447,13 @@
           <h2>Profile at a glance</h2>
           <dl>
             <dt>所属</dt>
-            <dd>日本大学大学院 理工学研究科</dd>
-            <dt>専攻</dt>
-            <dd>交通システム工学専攻</dd>
-            <dt>学年</dt>
-            <dd>修士課程1年</dd>
+            <dd>日本大学大学院 理工学研究科 修士課程1年</dd>
             <dt>研究室</dt>
-            <dd>高橋・中村研究室</dd>
+            <dd>高橋研究室（高橋 聖 教授）</dd>
+            <dt>出身</dt>
+            <dd>日本大学理工学部 応用情報工学科</dd>
             <dt>分野</dt>
-            <dd>交通工学 / 機械学習</dd>
+            <dd>交通工学 / 機械学習（強化学習）</dd>
           </dl>
         </aside>
       </div>
@@ -465,15 +468,16 @@
         </div>
         <div class="card">
           <p>
-            日本大学大学院 理工学研究科 交通システム工学専攻の修士課程1年です。
-            学部時代から、交通管理システムにおける信号制御の省人化を目指し、
-            機械学習（深層強化学習）を用いた信号制御の研究に取り組んでいます。
+            日本大学大学院 理工学研究科 修士課程1年（高橋研究室、指導教員：高橋 聖 教授）です。
+            日本大学理工学部 応用情報工学科での卒業研究から一貫して、交通管理システムにおける
+            信号制御の省人化を目指し、機械学習（深層強化学習）を用いた信号制御の研究に取り組んでいます。
           </p>
           <p>
-            熟練技術者の知見に依存している信号制御パラメータの決定を、
+            熟練技術者の経験的知見に依存している信号制御パラメータの決定を、
             日本の交通規則・交通流に即した形で自動化・最適化することに関心があります。
-            交通シミュレータ SUMO を用いた実験環境の構築や、
-            複数交差点を対象とした強化学習モデルの汎用性検証を中心に進めています。
+            交通シミュレータ SUMO 上に日本の交通状況を模擬した複数交差点環境を構築し、
+            現在は、サイクル長・オフセット・青時間スプリットを統合的に制御する
+            階層型強化学習による渋滞緩和に取り組んでいます。
           </p>
         </div>
       </div>
@@ -484,44 +488,50 @@
       <div class="wrap">
         <div class="section__head">
           <h2 id="research-title"><span class="num">02</span>Research</h2>
-          <p>深層強化学習を用いた交通信号制御</p>
+          <p>サイクル長を考慮した階層型強化学習を用いた信号制御</p>
         </div>
         <div class="card">
+          <p class="lead">
+            <strong>現在のテーマ：サイクル長を考慮した階層型強化学習を用いた信号制御。</strong>
+            卒業研究で取り組んだ「複数交差点における深層強化学習（DDQN）による信号制御」を発展させ、
+            サイクル長・オフセット・青時間スプリットを統合的に制御する手法へと展開しています。
+          </p>
           <ul class="research-points">
             <li>
               <span class="label">背景</span>
               <span>
-                信号制御パラメータは熟練技術者の知見によって決定されていますが、
-                技術者の減少を背景に、機械学習による省人化が期待されています。
-                一方で先行研究の多くは単一交差点を対象とし、サイクル長が可変であったり、
-                日本の交通規則・交通流（車群到着が支配的となる環境など）と乖離している課題があります。
+                信号制御パラメータは熟練技術者の経験的知見に基づいて決定されてきましたが、
+                技術者の減少に伴い、機械学習による省人化が期待されています。
+                これまでの研究の多くは単一交差点を対象としており、複数交差点を対象とした研究は限られています。
+                また、既存の階層型強化学習を用いた研究は日本の交通規則や現実の交通流との乖離があり、
+                既存手法に対する優位性を示すには至っていません。
               </span>
             </li>
             <li>
               <span class="label">目的</span>
               <span>
-                サイクル長を固定し、日本の道路環境に即した複数交差点環境で渋滞を緩和する
-                信号制御を実現すること、また交差点ごとの個別学習を不要とするモデルの
-                汎用性（転移性能）を検証することを目的としています。
+                日本の交通状況を模擬した複数交差点環境を SUMO 上に構築し、
+                サイクル長・オフセット・青時間スプリットの3つを制御対象とする
+                階層型強化学習モデルを提案します。これらを統合的に最適化することで、
+                現実的な交通環境における渋滞緩和の実現を目指します。
               </span>
             </li>
             <li>
               <span class="label">手法</span>
               <span>
-                交通シミュレータ SUMO で日本の交通規則・交通流に即した環境を構築し、
-                Deep Q-Network (DQN) / Double DQN (DDQN) を信号制御に適用します。
-                前サイクルの各方向の遅れ時間と停車台数を状態として入力し、
-                第1現示の青時間スプリットを行動として決定、遅れ時間を指標とした報酬で学習します。
-                さらに、オフセットを決定する上位エージェントと青時間スプリットを決定する
-                下位エージェントが協調する階層型強化学習も検討しています。
+                階層型強化学習（HRL）を採用し、上位エージェントには Double DQN（DDQN）、
+                下位エージェントには報酬分布を複数の分位点で推定する Quantile Regression DDQN を用います。
+                上位エージェントはサブエリアの結合とオフセットを決定して全体交通流を最適化し、
+                下位エージェントは各サブエリアを観測して最適なサイクル長を学習します。
+                評価は10交差点が連なる環境（5交差点ずつの2サブエリア、サブエリア間400m、制限速度50km/h）で行います。
               </span>
             </li>
             <li>
-              <span class="label">成果</span>
+              <span class="label">現状</span>
               <span>
-                単一交差点で学習した DQN モデルを、追加学習なしで複数交差点環境に適用した場合でも、
-                固定時間制御やギャップ感応制御と比較して総遅れ時間・停車台数を削減できることを
-                シミュレーションで確認しました。
+                固定時間制御と比較して、停車台数を約14.2%削減できることを確認しました（総遅れ時間の削減は現状では限定的）。
+                オフセット遷移時のサイクル長変動が一因と考えられ、今後は遷移時の遅れ時間を
+                ペナルティに含めた追加学習やモデルの再検討により、さらなる改善を進めます。
               </span>
             </li>
           </ul>
@@ -534,34 +544,48 @@
       <div class="wrap">
         <div class="section__head">
           <h2 id="projects-title"><span class="num">03</span>Projects</h2>
-          <p>これまでに取り組んだ研究テーマ</p>
+          <p>これまでの研究の流れ</p>
         </div>
         <div class="grid-2">
           <article class="card project">
-            <h3>単一交差点モデルの複数交差点へのゼロショット転移</h3>
+            <h3>複数交差点への深層強化学習の汎用性検証</h3>
             <p>
-              単一交差点で学習した DQN エージェントを、追加学習なしで複数交差点環境に適用し、
-              各方向の交通需要に応じた青時間スプリット制御が成立するかを検証しました。
+              単一交差点で学習した DDQN を、追加学習なしで複数交差点環境へ適用（ゼロショット転移）。
+              日本の交通状況を模擬した SUMO 環境で、固定時間制御・ギャップ感応制御と比較して
+              総遅れ時間・停車台数を削減し、モデルの汎用性を確認しました。
             </p>
             <ul class="meta">
-              <li>DQN</li>
+              <li>卒業研究</li>
+              <li>電気学会 全国大会</li>
+              <li>DDQN</li>
               <li>ゼロショット転移</li>
-              <li>SUMO</li>
-              <li>複数交差点</li>
             </ul>
           </article>
           <article class="card project">
-            <h3>サイクル長を考慮した階層型強化学習</h3>
+            <h3>サイクル長を考慮した階層型強化学習（初期検討）</h3>
             <p>
               オフセットを決定する上位エージェントと青時間スプリットを決定する下位エージェントを
-              DDQN で構成し、サイクル長を固定したうえで広域・局所の最適化を両立する
-              階層型強化学習による信号制御を検討しました。
+              DDQN で構成した階層型強化学習を検討。下位エージェント単独の制御で、
+              総遅れ時間・停車台数の削減を確認しました。
             </p>
             <ul class="meta">
-              <li>DDQN</li>
+              <li>電気学会 産業応用部門大会</li>
               <li>階層型強化学習</li>
               <li>オフセット制御</li>
-              <li>SUMO</li>
+            </ul>
+          </article>
+          <article class="card project">
+            <h3>サイクル長・オフセット・青時間スプリットの統合制御（現在）</h3>
+            <p>
+              3つのパラメータを制御対象とする階層型強化学習を提案。
+              上位エージェントに DDQN、下位エージェントに Quantile Regression DDQN を用い、
+              10交差点が連なる環境で大域的な協調制御と局所的な適応制御の両立による渋滞緩和を目指しています。
+            </p>
+            <ul class="meta">
+              <li>階層型強化学習</li>
+              <li>DDQN</li>
+              <li>QR-DDQN</li>
+              <li>統合最適化</li>
             </ul>
           </article>
         </div>
@@ -588,7 +612,8 @@
               <li class="tag">深層強化学習</li>
               <li class="tag">DQN</li>
               <li class="tag">DDQN</li>
-              <li class="tag">階層型強化学習</li>
+              <li class="tag">Quantile Regression DDQN</li>
+              <li class="tag">階層型強化学習（HRL）</li>
             </ul>
           </div>
           <div class="card skills-group">
@@ -608,7 +633,7 @@
       <div class="wrap">
         <div class="section__head">
           <h2 id="publications-title"><span class="num">05</span>Publications</h2>
-          <p>学会発表</p>
+          <p>学会発表・卒業研究</p>
         </div>
         <div class="card">
           <ul class="pub-list">
@@ -629,6 +654,15 @@
                 <span class="me">幕田 亮介</span>、福田 卓海、高橋 聖、中村 英夫
               </p>
               <p class="pub-meta">電気学会 産業応用部門大会、2025年</p>
+            </li>
+            <li>
+              <p class="pub-title">
+                複数交差点における深層強化学習を用いた信号制御
+              </p>
+              <p class="pub-authors">
+                <span class="me">幕田 亮介</span>（指導教員：高橋 聖 教授）
+              </p>
+              <p class="pub-meta">日本大学理工学部 応用情報工学科 卒業研究、2025年度</p>
             </li>
           </ul>
         </div>
@@ -663,7 +697,7 @@
   <footer class="site-footer">
     <div class="wrap">
       <p>&copy; <span id="year"></span> 幕田 亮介 (Ryosuke Makuta)</p>
-      <p>日本大学大学院 理工学研究科 交通システム工学専攻</p>
+      <p>日本大学大学院 理工学研究科 高橋研究室</p>
       <p>最終更新: <span id="updated"></span></p>
     </div>
   </footer>

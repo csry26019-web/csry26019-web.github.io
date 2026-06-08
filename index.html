@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>幕田 亮介 | 研究ポートフォリオ</title>
+  <meta name="description" content="日本大学大学院 理工学研究科 修士課程の幕田亮介の研究ポートフォリオ。深層強化学習を用いた交通信号制御に関する研究を紹介します。" />
+  <meta name="author" content="幕田 亮介 (Ryosuke Makuta)" />
+  <!-- 検索エンジンにインデックスさせない（URLを知っている人だけが閲覧する想定） -->
+  <meta name="robots" content="noindex, nofollow" />
+  <meta name="googlebot" content="noindex, nofollow" />
+  <meta name="color-scheme" content="light" />
+  <style>
+    :root {
+      --bg: #fbfbfa;
+      --surface: #ffffff;
+      --surface-alt: #f4f6f7;
+      --text: #1f2933;
+      --muted: #52606d;
+      --primary: #2c5f6f;
+      --primary-strong: #224b58;
+      --accent: #3d7a8c;
+      --border: #e2e7ea;
+      --tag-bg: #eaf1f3;
+      --tag-text: #275663;
+      --max-width: 960px;
+      --radius: 12px;
+      --shadow: 0 1px 3px rgba(31, 41, 51, 0.06), 0 6px 18px rgba(31, 41, 51, 0.05);
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      * { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
+    }
+
+    body {
+      margin: 0;
+      font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN",
+        "Hiragino Sans", Meiryo, sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      line-height: 1.8;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+
+    a { color: var(--primary); }
+    a:hover { color: var(--primary-strong); }
+
+    /* キーボード操作時のフォーカスを明確にする（アクセシビリティ） */
+    a:focus-visible,
+    button:focus-visible {
+      outline: 3px solid var(--accent);
+      outline-offset: 2px;
+      border-radius: 4px;
+    }
+
+    .skip-link {
+      position: absolute;
+      left: -999px;
+      top: 0;
+      background: var(--primary);
+      color: #fff;
+      padding: 0.6rem 1rem;
+      z-index: 1000;
+      border-radius: 0 0 8px 0;
+    }
+    .skip-link:focus {
+      left: 0;
+      color: #fff;
+    }
+
+    .wrap {
+      width: 100%;
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 1.25rem;
+    }
+
+    /* ===== ヘッダー / ナビゲーション ===== */
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(251, 251, 250, 0.92);
+      backdrop-filter: saturate(180%) blur(8px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 60px;
+      gap: 1rem;
+    }
+    .nav__brand {
+      font-weight: 700;
+      font-size: 1.05rem;
+      color: var(--text);
+      text-decoration: none;
+      letter-spacing: 0.02em;
+    }
+    .nav__list {
+      list-style: none;
+      display: flex;
+      gap: 1.4rem;
+      margin: 0;
+      padding: 0;
+    }
+    .nav__list a {
+      text-decoration: none;
+      color: var(--muted);
+      font-size: 0.95rem;
+      padding: 0.25rem 0;
+      border-bottom: 2px solid transparent;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .nav__list a:hover,
+    .nav__list a.is-active {
+      color: var(--primary);
+      border-bottom-color: var(--primary);
+    }
+    .nav__toggle {
+      display: none;
+      background: none;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 0.4rem 0.6rem;
+      cursor: pointer;
+      color: var(--text);
+      font-size: 1rem;
+      line-height: 1;
+    }
+
+    @media (max-width: 720px) {
+      .nav__toggle { display: inline-flex; align-items: center; gap: 0.4rem; }
+      .nav__list {
+        position: absolute;
+        top: 60px;
+        right: 0;
+        left: 0;
+        flex-direction: column;
+        gap: 0;
+        background: var(--surface);
+        border-bottom: 1px solid var(--border);
+        box-shadow: var(--shadow);
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.25s ease;
+      }
+      .nav__list.is-open { max-height: 420px; }
+      .nav__list li { width: 100%; }
+      .nav__list a {
+        display: block;
+        padding: 0.9rem 1.25rem;
+        border-bottom: 1px solid var(--border);
+      }
+      .nav__list a:hover,
+      .nav__list a.is-active { border-bottom-color: var(--border); }
+    }
+
+    /* ===== ヒーロー ===== */
+    .hero {
+      padding: clamp(2.5rem, 6vw, 4.5rem) 0 clamp(2rem, 4vw, 3rem);
+    }
+    .hero__grid {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr;
+      gap: clamp(1.5rem, 4vw, 3rem);
+      align-items: center;
+    }
+    .hero__eyebrow {
+      color: var(--accent);
+      font-size: 0.9rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin: 0 0 0.6rem;
+      font-weight: 600;
+    }
+    .hero h1 {
+      font-size: clamp(1.8rem, 5vw, 2.6rem);
+      margin: 0 0 0.4rem;
+      line-height: 1.3;
+    }
+    .hero h1 .en {
+      display: block;
+      font-size: 0.92rem;
+      font-weight: 500;
+      color: var(--muted);
+      letter-spacing: 0.04em;
+      margin-top: 0.4rem;
+    }
+    .hero__lead {
+      font-size: 1.08rem;
+      color: var(--text);
+      margin: 1rem 0 1.2rem;
+    }
+    .hero__affil {
+      color: var(--muted);
+      font-size: 0.98rem;
+      margin: 0 0 1.2rem;
+    }
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      padding: 0;
+      margin: 0;
+      list-style: none;
+    }
+    .tag {
+      background: var(--tag-bg);
+      color: var(--tag-text);
+      font-size: 0.82rem;
+      padding: 0.3rem 0.7rem;
+      border-radius: 999px;
+      white-space: nowrap;
+    }
+    .hero__card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.4rem 1.5rem;
+      box-shadow: var(--shadow);
+    }
+    .hero__card h2 {
+      font-size: 0.78rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin: 0 0 0.8rem;
+    }
+    .hero__card dl {
+      margin: 0;
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 0.55rem 1rem;
+      font-size: 0.95rem;
+    }
+    .hero__card dt { color: var(--muted); white-space: nowrap; }
+    .hero__card dd { margin: 0; }
+
+    @media (max-width: 720px) {
+      .hero__grid { grid-template-columns: 1fr; }
+    }
+
+    /* ===== セクション共通 ===== */
+    section[id] { padding: clamp(2.5rem, 5vw, 3.5rem) 0; scroll-margin-top: 72px; }
+    .section + .section { border-top: 1px solid var(--border); }
+    .section__head {
+      margin: 0 0 1.6rem;
+    }
+    .section__head h2 {
+      font-size: clamp(1.4rem, 3.5vw, 1.8rem);
+      margin: 0 0 0.3rem;
+      display: inline-flex;
+      align-items: baseline;
+      gap: 0.6rem;
+    }
+    .section__head h2 .num {
+      font-size: 0.85rem;
+      color: var(--accent);
+      font-weight: 600;
+    }
+    .section__head p {
+      color: var(--muted);
+      margin: 0;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.4rem 1.5rem;
+      box-shadow: var(--shadow);
+    }
+    .card + .card { margin-top: 1rem; }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+    }
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+    }
+    @media (max-width: 720px) {
+      .grid-2, .grid-3 { grid-template-columns: 1fr; }
+    }
+
+    /* Research */
+    .research-points {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: grid;
+      gap: 1rem;
+    }
+    .research-points li {
+      display: grid;
+      grid-template-columns: 7.5rem 1fr;
+      gap: 1rem;
+      align-items: start;
+    }
+    .research-points .label {
+      font-weight: 600;
+      color: var(--primary);
+    }
+    @media (max-width: 520px) {
+      .research-points li { grid-template-columns: 1fr; gap: 0.2rem; }
+    }
+
+    /* Projects */
+    .project h3 { margin: 0 0 0.4rem; font-size: 1.1rem; }
+    .project p { margin: 0 0 0.8rem; color: var(--muted); }
+    .project .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    .project .meta li {
+      font-size: 0.78rem;
+      color: var(--tag-text);
+      background: var(--tag-bg);
+      padding: 0.2rem 0.6rem;
+      border-radius: 6px;
+    }
+
+    /* Skills */
+    .skills-group h3 {
+      font-size: 0.95rem;
+      margin: 0 0 0.6rem;
+      color: var(--muted);
+    }
+
+    /* Publications */
+    .pub-list { margin: 0; padding: 0; list-style: none; display: grid; gap: 1rem; }
+    .pub-list li {
+      padding-left: 1.1rem;
+      border-left: 3px solid var(--accent);
+    }
+    .pub-list .pub-title { font-weight: 600; }
+    .pub-list .pub-meta { color: var(--muted); font-size: 0.92rem; }
+    .pub-list .pub-authors { font-size: 0.92rem; }
+    .pub-list .me { color: var(--primary); font-weight: 600; }
+
+    /* Contact */
+    .contact-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+    }
+    @media (max-width: 520px) { .contact-list { grid-template-columns: 1fr; } }
+    .contact-list a {
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+      text-decoration: none;
+      padding: 1rem 1.2rem;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: var(--surface);
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .contact-list a:hover {
+      border-color: var(--accent);
+      box-shadow: var(--shadow);
+    }
+    .contact-list .ct-label { font-size: 0.8rem; color: var(--muted); }
+    .contact-list .ct-value { font-weight: 600; color: var(--text); word-break: break-all; }
+
+    /* ===== フッター ===== */
+    .site-footer {
+      border-top: 1px solid var(--border);
+      background: var(--surface-alt);
+      padding: 2rem 0;
+      margin-top: 1rem;
+    }
+    .site-footer p { margin: 0.2rem 0; color: var(--muted); font-size: 0.9rem; }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">本文へスキップ</a>
+
+  <header class="site-header">
+    <div class="wrap nav">
+      <a class="nav__brand" href="#top">幕田 亮介</a>
+      <button class="nav__toggle" aria-expanded="false" aria-controls="nav-list">
+        <span aria-hidden="true">☰</span> メニュー
+      </button>
+      <nav aria-label="メインナビゲーション">
+        <ul class="nav__list" id="nav-list">
+          <li><a href="#profile">Profile</a></li>
+          <li><a href="#research">Research</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#skills">Skills</a></li>
+          <li><a href="#publications">Publications</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- ===== Hero ===== -->
+    <section class="hero" id="top" aria-labelledby="hero-title">
+      <div class="wrap hero__grid">
+        <div>
+          <p class="hero__eyebrow">Research Portfolio</p>
+          <h1 id="hero-title">
+            幕田 亮介
+            <span class="en">Ryosuke Makuta</span>
+          </h1>
+          <p class="hero__lead">
+            深層強化学習を用いて、日本の道路環境に即した交通信号制御の渋滞抑制に取り組んでいます。
+          </p>
+          <p class="hero__affil">
+            日本大学大学院 理工学研究科 交通システム工学専攻 修士課程1年<br />
+            高橋・中村研究室
+          </p>
+          <ul class="tags" aria-label="研究キーワード">
+            <li class="tag">深層強化学習</li>
+            <li class="tag">交通信号制御</li>
+            <li class="tag">DQN / DDQN</li>
+            <li class="tag">階層型強化学習</li>
+            <li class="tag">SUMO</li>
+          </ul>
+        </div>
+        <aside class="hero__card" aria-label="プロフィール概要">
+          <h2>Profile at a glance</h2>
+          <dl>
+            <dt>所属</dt>
+            <dd>日本大学大学院 理工学研究科</dd>
+            <dt>専攻</dt>
+            <dd>交通システム工学専攻</dd>
+            <dt>学年</dt>
+            <dd>修士課程1年</dd>
+            <dt>研究室</dt>
+            <dd>高橋・中村研究室</dd>
+            <dt>分野</dt>
+            <dd>交通工学 / 機械学習</dd>
+          </dl>
+        </aside>
+      </div>
+    </section>
+
+    <!-- ===== Profile ===== -->
+    <section class="section" id="profile" aria-labelledby="profile-title">
+      <div class="wrap">
+        <div class="section__head">
+          <h2 id="profile-title"><span class="num">01</span>Profile</h2>
+          <p>自己紹介と関心分野</p>
+        </div>
+        <div class="card">
+          <p>
+            日本大学大学院 理工学研究科 交通システム工学専攻の修士課程1年です。
+            学部時代から、交通管理システムにおける信号制御の省人化を目指し、
+            機械学習（深層強化学習）を用いた信号制御の研究に取り組んでいます。
+          </p>
+          <p>
+            熟練技術者の知見に依存している信号制御パラメータの決定を、
+            日本の交通規則・交通流に即した形で自動化・最適化することに関心があります。
+            交通シミュレータ SUMO を用いた実験環境の構築や、
+            複数交差点を対象とした強化学習モデルの汎用性検証を中心に進めています。
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Research ===== -->
+    <section class="section" id="research" aria-labelledby="research-title">
+      <div class="wrap">
+        <div class="section__head">
+          <h2 id="research-title"><span class="num">02</span>Research</h2>
+          <p>深層強化学習を用いた交通信号制御</p>
+        </div>
+        <div class="card">
+          <ul class="research-points">
+            <li>
+              <span class="label">背景</span>
+              <span>
+                信号制御パラメータは熟練技術者の知見によって決定されていますが、
+                技術者の減少を背景に、機械学習による省人化が期待されています。
+                一方で先行研究の多くは単一交差点を対象とし、サイクル長が可変であったり、
+                日本の交通規則・交通流（車群到着が支配的となる環境など）と乖離している課題があります。
+              </span>
+            </li>
+            <li>
+              <span class="label">目的</span>
+              <span>
+                サイクル長を固定し、日本の道路環境に即した複数交差点環境で渋滞を緩和する
+                信号制御を実現すること、また交差点ごとの個別学習を不要とするモデルの
+                汎用性（転移性能）を検証することを目的としています。
+              </span>
+            </li>
+            <li>
+              <span class="label">手法</span>
+              <span>
+                交通シミュレータ SUMO で日本の交通規則・交通流に即した環境を構築し、
+                Deep Q-Network (DQN) / Double DQN (DDQN) を信号制御に適用します。
+                前サイクルの各方向の遅れ時間と停車台数を状態として入力し、
+                第1現示の青時間スプリットを行動として決定、遅れ時間を指標とした報酬で学習します。
+                さらに、オフセットを決定する上位エージェントと青時間スプリットを決定する
+                下位エージェントが協調する階層型強化学習も検討しています。
+              </span>
+            </li>
+            <li>
+              <span class="label">成果</span>
+              <span>
+                単一交差点で学習した DQN モデルを、追加学習なしで複数交差点環境に適用した場合でも、
+                固定時間制御やギャップ感応制御と比較して総遅れ時間・停車台数を削減できることを
+                シミュレーションで確認しました。
+              </span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Projects ===== -->
+    <section class="section" id="projects" aria-labelledby="projects-title">
+      <div class="wrap">
+        <div class="section__head">
+          <h2 id="projects-title"><span class="num">03</span>Projects</h2>
+          <p>これまでに取り組んだ研究テーマ</p>
+        </div>
+        <div class="grid-2">
+          <article class="card project">
+            <h3>単一交差点モデルの複数交差点へのゼロショット転移</h3>
+            <p>
+              単一交差点で学習した DQN エージェントを、追加学習なしで複数交差点環境に適用し、
+              各方向の交通需要に応じた青時間スプリット制御が成立するかを検証しました。
+            </p>
+            <ul class="meta">
+              <li>DQN</li>
+              <li>ゼロショット転移</li>
+              <li>SUMO</li>
+              <li>複数交差点</li>
+            </ul>
+          </article>
+          <article class="card project">
+            <h3>サイクル長を考慮した階層型強化学習</h3>
+            <p>
+              オフセットを決定する上位エージェントと青時間スプリットを決定する下位エージェントを
+              DDQN で構成し、サイクル長を固定したうえで広域・局所の最適化を両立する
+              階層型強化学習による信号制御を検討しました。
+            </p>
+            <ul class="meta">
+              <li>DDQN</li>
+              <li>階層型強化学習</li>
+              <li>オフセット制御</li>
+              <li>SUMO</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Skills ===== -->
+    <section class="section" id="skills" aria-labelledby="skills-title">
+      <div class="wrap">
+        <div class="section__head">
+          <h2 id="skills-title"><span class="num">04</span>Skills</h2>
+          <p>研究で使用している言語・ツール・手法</p>
+        </div>
+        <div class="grid-3">
+          <div class="card skills-group">
+            <h3>言語</h3>
+            <ul class="tags">
+              <li class="tag">Python</li>
+            </ul>
+          </div>
+          <div class="card skills-group">
+            <h3>機械学習 / 手法</h3>
+            <ul class="tags">
+              <li class="tag">深層強化学習</li>
+              <li class="tag">DQN</li>
+              <li class="tag">DDQN</li>
+              <li class="tag">階層型強化学習</li>
+            </ul>
+          </div>
+          <div class="card skills-group">
+            <h3>ツール</h3>
+            <ul class="tags">
+              <li class="tag">SUMO</li>
+              <li class="tag">Git</li>
+              <li class="tag">LaTeX</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Publications ===== -->
+    <section class="section" id="publications" aria-labelledby="publications-title">
+      <div class="wrap">
+        <div class="section__head">
+          <h2 id="publications-title"><span class="num">05</span>Publications</h2>
+          <p>学会発表</p>
+        </div>
+        <div class="card">
+          <ul class="pub-list">
+            <li>
+              <p class="pub-title">
+                交通信号制御における単一交差点で学習した深層強化学習モデルの複数交差点に対する汎用性の検証
+              </p>
+              <p class="pub-authors">
+                <span class="me">幕田 亮介</span>、福田 卓海、高橋 聖、中村 英夫
+              </p>
+              <p class="pub-meta">電気学会 全国大会、2026年</p>
+            </li>
+            <li>
+              <p class="pub-title">
+                サイクル長を考慮した階層型強化学習を用いた信号制御の一検討
+              </p>
+              <p class="pub-authors">
+                <span class="me">幕田 亮介</span>、福田 卓海、高橋 聖、中村 英夫
+              </p>
+              <p class="pub-meta">電気学会 産業応用部門大会、2025年</p>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Contact ===== -->
+    <section class="section" id="contact" aria-labelledby="contact-title">
+      <div class="wrap">
+        <div class="section__head">
+          <h2 id="contact-title"><span class="num">06</span>Contact</h2>
+          <p>連絡先・リンク</p>
+        </div>
+        <ul class="contact-list">
+          <li>
+            <a href="mailto:csry26019@g.nihon-u.ac.jp">
+              <span class="ct-label">Email（大学）</span>
+              <span class="ct-value">csry26019@g.nihon-u.ac.jp</span>
+            </a>
+          </li>
+          <li>
+            <a href="https://github.com/csry26019-web" target="_blank" rel="noopener noreferrer">
+              <span class="ct-label">GitHub</span>
+              <span class="ct-value">github.com/csry26019-web</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <p>&copy; <span id="year"></span> 幕田 亮介 (Ryosuke Makuta)</p>
+      <p>日本大学大学院 理工学研究科 交通システム工学専攻</p>
+      <p>最終更新: <span id="updated"></span></p>
+    </div>
+  </footer>
+
+  <script>
+    // 現在の年と最終更新日を表示
+    document.getElementById("year").textContent = new Date().getFullYear();
+    document.getElementById("updated").textContent =
+      new Date().toLocaleDateString("ja-JP", { year: "numeric", month: "long" });
+
+    // モバイル用ナビゲーションの開閉
+    var toggle = document.querySelector(".nav__toggle");
+    var list = document.getElementById("nav-list");
+    toggle.addEventListener("click", function () {
+      var open = list.classList.toggle("is-open");
+      toggle.setAttribute("aria-expanded", open ? "true" : "false");
+    });
+    // リンクをクリックしたらメニューを閉じる（モバイル）
+    list.addEventListener("click", function (e) {
+      if (e.target.tagName === "A") {
+        list.classList.remove("is-open");
+        toggle.setAttribute("aria-expanded", "false");
+      }
+    });
+
+    // スクロールに応じて現在のセクションをナビでハイライト
+    var sections = document.querySelectorAll("main section[id]");
+    var navLinks = document.querySelectorAll(".nav__list a");
+    if ("IntersectionObserver" in window) {
+      var observer = new IntersectionObserver(
+        function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              var id = entry.target.getAttribute("id");
+              navLinks.forEach(function (link) {
+                link.classList.toggle(
+                  "is-active",
+                  link.getAttribute("href") === "#" + id
+                );
+              });
+            }
+          });
+        },
+        { rootMargin: "-40% 0px -55% 0px" }
+      );
+      sections.forEach(function (s) { observer.observe(s); });
+    }
+  </script>
+</body>
+</html>
